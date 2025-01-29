@@ -1,0 +1,6 @@
+1. una variabile memorizza un singolo valore mentre un oggetto puo contenere piu' proprietà
+2. una variabile si dichiara con <let car = "Fiat";> mentre un oggetto si dichiara con <const car = {type:"Fiat", model:"500", color:"white"};>
+3. le proprietà si rappresentano con <let auto = { marca: "Toyota", modello: "Yaris", anno: 2022 };>
+4. la virgola separa le coppie chiave: valore, tranne dopo l'ultima coppia.
+5. per accedere al valore della proprietà ci sono due modi nel primo scrivi <objectName.propertyName> per il secondo scriviamo <objectName["propertyName"]>
+esempio 1 <person.lastName;> esempio 2 <person["lastName"];>
