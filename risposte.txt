@@ -4,3 +4,5 @@
 4. la virgola separa le coppie chiave: valore, tranne dopo l'ultima coppia.
 5. per accedere al valore della proprietà ci sono due modi nel primo scrivi <objectName.propertyName> per il secondo scriviamo <objectName["propertyName"]>
 esempio 1 <person.lastName;> esempio 2 <person["lastName"];>
+
+6.

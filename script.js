@@ -23,8 +23,8 @@ function mostraAnimale(animal) {
         document.getElementById("info5").innerHTML = animale2.razza;
         document.getElementById("info6").innerHTML = animale2.zampe;
     } else if (animal === 2) {
-        document.getElementById("info7").innerHTML = animale3.specie;
-        document.getElementById("info8").innerHTML = animale3.razza;
-        document.getElementById("info9").innerHTML = animale3.zampe;
+        document.getElementById("info7").innerHTML = animale3["specie"];
+        document.getElementById("info8").innerHTML = animale3["razza"];
+        document.getElementById("info9").innerHTML = animale3["zampe"];
     }
 }
