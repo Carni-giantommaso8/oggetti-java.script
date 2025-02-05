@@ -1,0 +1,7 @@
+1. viene aggiunto nello script quando iniziamo a scrivere le nostre prime righe di codice
+2. <body onload="startGame()"> è utile per inizializzare il gioco senza che l'utente debba premere un pulsante.
+mentre myGameArea.start();  potrebbe creare un canvas, impostare un ciclo di gioco e ascoltare eventi dell'utente.
+3. è come collegare una funzione ad un altra, tu metti quel nome e sotto quel nome inserisci cio che il comando fa 
+4. inizializza la funzione 
+5. dopo lo start inseriamo una nuova funzione dove al suo interno scriviamo cio che vogliamo fare o creare e viene aggiunto nel body della pagina grazie al comando
+<document.body.insertBefore(this.canvas,document.body.childNodes[0]);>
