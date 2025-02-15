@@ -1,0 +1,38 @@
+button{ 
+    width: 175px;
+    height: 75px ;
+    font-size: 20px;
+    border-radius: 25px;
+    color: rgb(93, 140, 155);
+    border: 3px solid rgb(93, 140, 155);
+}
+img{ 
+    border-radius: 40px;
+    display: flex;
+    font-display: flex;
+}
+p{ 
+    color: rgb(83, 129, 55);
+    font-size: 20px;
+}
+a{ 
+    color: rgb(202, 119, 191);
+    font-size: 20px;
+}
+.container {
+    width: 1300px;
+    max-width: 1300px;
+    margin: auto;
+    border: 2px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+}
+iframe {
+    height: 400px;
+    width: 500px;
+    border: none;
+    margin-left: 300px;
+    border-radius: 40px ;
+}
