@@ -1,6 +1,7 @@
 function startGame() {
     myGameArea.start();
     animatedObject.loadImages();
+    bushObject.loadImages();
 };
 
 var myGameArea = {
@@ -53,6 +54,7 @@ function updateGameArea() {
     myGameArea.context.clearRect(0, 0, myGameArea.canvas.width, myGameArea.canvas.height);
     animatedObject.update();
     myGameArea.drawGameObject(animatedObject);
+    myGameArea.drawGameObject(bushObject);
 
 }
 
@@ -88,6 +90,7 @@ var animatedObject = {
         this.actualFrame = (1 + this.actualFrame) % this.imageList.length;
         //console.log(this.actualFrame);
         this.image = this.imageList[this.actualFrame];
+        
       }
     },
   
@@ -103,16 +106,15 @@ var animatedObject = {
     } 
 };  
 var bushObject = {
-  width: 100,
-  height: 50,
-  x: 100,
-  y: 270 - 50,
+    width: 100,
+    height: 50,
+    x: 220,
+    y: 270 - 50,
 
-  loadImages: function() {
-    this.image = new Image(this.width, this.height);
-    this.image.src = "https://i.ibb.co/CPdHYdB/Bush-1.png";
-  }
-  
+    loadImages: function() {
+        this.image = new Image(this.width, this.height);
+        this.image.src = "https://i.ibb.co/CPdHYdB/Bush-1.png";
+    }
 };
 
   

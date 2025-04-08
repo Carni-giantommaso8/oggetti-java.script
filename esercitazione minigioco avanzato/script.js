@@ -57,14 +57,14 @@ function updateGameArea() {
 }
 
 window.addEventListener("keydown", function(event) {
-    if (event.key === "ArrowUp") moveUp();
-    if (event.key === "ArrowDown") moveDown();
-    if (event.key === "ArrowLeft") moveLeft();
-    if (event.key === "ArrowRight") moveRight();
+    if (event.key === "w") moveUp();
+    if (event.key === "s") moveDown();
+    if (event.key === "a") moveLeft();
+    if (event.key === "d") moveRight();
 });
 
 window.addEventListener("keyup", function(event) {
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+    if (["w", "s", "a", "d"].includes(event.key)) {
         clearMove();
     }
 });

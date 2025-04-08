@@ -53,18 +53,19 @@ function updateGameArea() {
     myGameArea.context.clearRect(0, 0, myGameArea.canvas.width, myGameArea.canvas.height);
     animatedObject.update();
     myGameArea.drawGameObject(animatedObject);
+    
 
 }
 
 window.addEventListener("keydown", function(event) {
-    if (event.key === "ArrowUp") moveUp();
-    if (event.key === "ArrowDown") moveDown();
-    if (event.key === "ArrowLeft") moveLeft();
-    if (event.key === "ArrowRight") moveRight();
+    if (event.key === "w") moveUp();
+    if (event.key === "s") moveDown();
+    if (event.key === "a") moveLeft();
+    if (event.key === "d") moveRight();
 });
 
 window.addEventListener("keyup", function(event) {
-    if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+    if (["w", "s", "a", "d"].includes(event.key)) {
         clearMove();
     }
 });
@@ -83,7 +84,7 @@ var animatedObject = {
       this.x += this.speedX;
       this.y += this.speedY;
       this.contaFrame++;
-      if (this.contaFrame == 4) {
+      if (this.contaFrame == 2) {
         this.contaFrame = 0;
         this.actualFrame = (1 + this.actualFrame) % this.imageList.length;
         //console.log(this.actualFrame);
