@@ -4,3 +4,11 @@ body{
     background-color: black;
 }
 
+@media (min-width: 600px) and (max-width: 600px) and (min-height: 600px) and (max-height: 600px){
+canvas{
+    left: 50%;
+    bottom: 50%;
+    width: 50%;
+    height: 50%;
+    }
+}
