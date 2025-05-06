@@ -7,6 +7,8 @@ const wallSpaceWidth = oneBlockSize / 1.6;
 const wallOffset = (oneBlockSize - wallSpaceWidth) / 2;
 const wallInnerColor = "black";
 
+let frameCount = 0;
+const pacmanMoveDelay = 60;
 // La mappa: 
 // 0 = vuoto , 1 = muro, 2 = spazio vuoto
 const map = [
@@ -17,14 +19,14 @@ const map = [
     [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
     [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
     [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1],
-    [2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2], // 1 1
-    [1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 0, 0, 0, 0],
-    [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
-    [1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+    [0, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 0], // 1 1
+    [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
     [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
     [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
     [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
@@ -97,5 +99,87 @@ function drawWalls  ()  {
     }
 };
 
-// Funzione per disegnare i muri sul canvas
-drawWalls();
+// Funzione che disegna il cibo nel labirinto
+function drawFoods () {
+    for (let i = 0; i < map.length; i++) {
+        for (let j = 0; j < map[0].length; j++) {
+            if (map[i][j] == 2) {
+                createRect(
+                    j * oneBlockSize + oneBlockSize / 3,
+                    i * oneBlockSize + oneBlockSize / 3,
+                    oneBlockSize / 3,
+                    oneBlockSize / 3,
+                    "#FEB897"
+                );
+            }
+        }
+    }
+};
+
+let pacman = {
+    x: 1,   // posizione in blocchi
+    y: 1,
+    pixelX: 1 * oneBlockSize,
+    pixelY: 1 * oneBlockSize,
+    speed: 1,   // pixel per frame (più lento e fluido)
+    color: "yellow",
+};
+
+function drawPacman() {
+    createRect(
+        pacman.x * oneBlockSize,    // Posizione orizzontale in pixel
+        pacman.y * oneBlockSize,    // Posizione verticale in pixel
+        oneBlockSize,               // Larghezza del rettangolo
+        oneBlockSize,               // Altezza del rettangolo
+        pacman.color                // Colore di riempimento del rettangolo
+    );
+}
+
+function isWall(x, y) {
+    return map[y] && map[y][x] === 1;
+}
+
+function movePacman() {
+    frameCount++;
+    if (frameCount < pacmanMoveDelay) return;
+    frameCount = 0;
+
+    let nextX = pacman.x;
+    let nextY = pacman.y;
+
+    if (pacman.direction === "left") nextX -= pacman.speed;
+    if (pacman.direction === "right") nextX += pacman.speed;
+    if (pacman.direction === "up") nextY -= pacman.speed;
+    if (pacman.direction === "down") nextY += pacman.speed;
+
+    if (!isWall(nextX, nextY)) {
+        pacman.x = nextX;
+        pacman.y = nextY;
+
+        // Mangia il cibo
+        if (map[pacman.y][pacman.x] === 2) {
+            map[pacman.y][pacman.x] = 0;
+        }
+    }
+}
+document.addEventListener("keydown", function (event) {
+    const key = event.key.toLowerCase();
+    if (key === "a" ) pacman.direction = "left";
+    if (key === "d") pacman.direction = "right";
+    if (key === "w") pacman.direction = "up";
+    if (key === "s") pacman.direction = "down";
+});
+
+
+
+// Loop del gioco
+function gameLoop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawWalls();
+    drawFoods();
+    movePacman();
+    drawPacman();
+    requestAnimationFrame(gameLoop);
+}
+
+requestAnimationFrame(gameLoop);
